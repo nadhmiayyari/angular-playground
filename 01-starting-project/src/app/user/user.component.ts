@@ -1,4 +1,4 @@
-import {Component, computed, signal} from '@angular/core';
+import {Component, computed, Input, signal} from '@angular/core';
 import {DUMMY_USERS} from "../dummy-users";
 
 
@@ -12,16 +12,15 @@ const randomIndex = Math.floor(Math.random()*DUMMY_USERS.length)
 })
 export class UserComponent {
 
-    selectedUser:any = signal(DUMMY_USERS[randomIndex] ) ;
-    imagePath= computed(()=>'assets/users/'+this.selectedUser().avatar)
-    //when changing that value ,angular can identify
-  // all the places where that value is used and able to update these places
- // when not using signals , angular uses zones around your components
-  // which is invisible grouping mechanism
-    //get imagePath(){
-    //  return 'assets/users/'+this.selectedUser.get().avatar
-   // }
-  onSelectUser(){
-       this.selectedUser.set(DUMMY_USERS[Math.floor(Math.random()*DUMMY_USERS.length)]);
+
+  // when adding ! ==> this indicate that this property is not null
+  @Input() avatar! :string;
+  @Input() name! :string;
+
+  get imagePath(){
+    return 'assets/users/'+this.avatar;
+  }
+  onSelectUser() {
   }
 }
+
