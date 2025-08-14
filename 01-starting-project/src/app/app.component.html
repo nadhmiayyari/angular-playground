@@ -3,7 +3,20 @@
 <main>
   <ul id="users">
     <li>
-      <app-user avatar=""/>
+      <app-user (selectedUser)="onSelectUser($event)"
+                [user]="users[0]"
+                [name]="users[0].name"
+                [id]="users[0].id"
+                [avatar]="users[0].avatar"/>
     </li>
+    <li>
+      <app-user (selectedUser)="onSelectUser($event)"
+                [user]="users[1]"
+                [name]="users[1].name"
+                [id]="users[1].id"
+                [avatar]="users[1].avatar"/>
+    </li>
+
   </ul>
+  <app-tasks [name]="selectedUser.name" ></app-tasks>
 </main>
